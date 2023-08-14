@@ -66,14 +66,7 @@ def slice_sentence(sentence):
     new_words = []
     for word in words:
         if randint(0, 1) == 0:
-            if randint(0, 1) == 0:
-                new_words.append(word + " ")
-            else:
-                lengthToDel = randint(0, len(word))
-                new_words.append(word[:lengthToDel])
-                new_words.append(Keys.BACKSPACE * lengthToDel)
-                new_words.append(word[:lengthToDel])
-                new_words.append(word[lengthToDel:] + " ")
+            new_words.append(word + " ")
         else:
             length = randint(0, len(word))
             new_words.append(word[:length])

@@ -16,7 +16,7 @@ def setupBrowser(browser,url,email,password):
         browser.find_element(By.XPATH, '//*[@id="__next"]/div[1]/div[1]/div[4]').find_element(By.CSS_SELECTOR,"button").click()
     '''
     action.send_keys(Keys.TAB, Keys.ENTER).perform()
-    timeR(3)
+    timeR(1.5)
     #enter the email
     #browser.find_element(By.XPATH, "/html/body/div[1]/main/section/div/div/div/div[1]/div/form/div[1]/div/div/div/input").send_keys(email)
     for i in email:
@@ -27,7 +27,7 @@ def setupBrowser(browser,url,email,password):
     #press the continue button
     timeR(0.5)
     action.send_keys(Keys.ENTER).perform()
-    timeR(1)
+    timeR(2)
     #enter the password
     browser.find_element(By.XPATH, "/html/body/div[1]/main/section/div/div/div/form/div[2]/div/div[2]/div/input").send_keys(password)
     print("Password entered")
@@ -58,3 +58,10 @@ def deleteConversation(browser):
         return False
     
     return True
+
+def delete_all_chats(browser):
+    #will delete all conversations
+    print("Deleting all conversations...")
+    while(deleteConversation(browser)):
+        pass
+    print("All conversations deleted")
