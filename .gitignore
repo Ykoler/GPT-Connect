@@ -1,10 +1,9 @@
 /.vscode
 /credentials.py
-/state0.png
-/state1.png
-/state2.png
-/state3.png
-/state4.png
-/state5.png
-/state6.png
-/state7.png
+__pycache__/botdetection.cpython-311.pyc
+__pycache__/credentials.cpython-311.pyc
+__pycache__/drivermanager.cpython-311.pyc
+__pycache__/gptmanager.cpython-311.pyc
+__pycache__/imports.cpython-311.pyc
+__pycache__/manager.cpython-311.pyc
+screenshot.png
