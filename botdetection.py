@@ -62,7 +62,7 @@ def move_mouse(browser, element = None):
 def slice_sentence(sentence):
     #splits a sentence into a list of words, but puts random cuts
     #in the sentence to make it look more human
-    words = sentence.split()
+    words = sentence.split(' ')
     new_words = []
     for word in words:
         if randint(0, 1) == 0:

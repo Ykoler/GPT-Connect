@@ -10,7 +10,7 @@ class GPT_Connect:
     def initiate_driver(self,email,password, debbug=False, hidden=True):
         #if(debbug):
         startTime = time.time()
-        self.browser = initialize_chrome_driver(debbug=debbug)
+        self.browser = initialize_chrome_driver(debbug=debbug, headless=hidden)
         
         gptmanager.setupBrowser(self.browser, "https://chat.openai.com/auth/login", email, password, debbug = debbug, headless = hidden)
         self.response_index = 0
@@ -24,10 +24,15 @@ class GPT_Connect:
         input_box = self.browser.find_element(
             by=By.XPATH, value='//textarea[contains(@placeholder, "Send a message")]'
         )
-        for word in slice_sentence(query):
-            time.sleep(0.02 + randint(0, 100) / 3000)
-            #self.browser.find_element(By.TAG_NAME, "textarea").send_keys(word)
-            input_box.send_keys(word)
+
+        
+        for sentence in query.split("\n"):
+            for word in slice_sentence(sentence):
+                time.sleep(0.02 + randint(0, 100) / 3000)
+                #self.browser.find_element(By.TAG_NAME, "textarea").send_keys(word)
+                input_box.send_keys(word)
+            #go down a line using shift + enter
+            input_box.send_keys(Keys.SHIFT + Keys.RETURN)
 
         # press the submit button
         timeR(0.5,0.5)
@@ -43,7 +48,7 @@ class GPT_Connect:
                 break
         # get the response
         try:
-            response = self.driver.find_elements(By.TAG_NAME, 'p').text
+            response = self.browser.find_elements(By.TAG_NAME, 'p')[-2].text
         except:
             raise Exception("There was an error with the response, please try again")
         return response
@@ -54,6 +59,13 @@ class GPT_Connect:
     def clear(self):
         self.response_index = 0
         gptmanager.deleteConversation(self.browser)
+
+    def clear_all(self):
+        self.response_index = 0
+        gptmanager.deleteAllConversations(self.browser)
+
+    def refresh(self):
+        self.browser.refresh()
 
     def conversation(self, delete=False):
         # start the conversation
@@ -84,3 +96,4 @@ class GPT_Connect:
             self.browser.close()
         except:
             pass
+    

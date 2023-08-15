@@ -10,7 +10,7 @@ def waitForLoad(browser, additional_wait_time, debbug=False):
         print("Waiting for page to load...")
     if debbug:
         print("Page loaded")
-    time.sleep(additional_wait_time)
+    timeR(additional_wait_time)
 
 
 def setupBrowser(browser, url, email, password, debbug=False, headless=False):
@@ -18,7 +18,7 @@ def setupBrowser(browser, url, email, password, debbug=False, headless=False):
         print("Setting up browser...")
 
     browser.get(url)
-    waitForLoad(browser, 0.5, debbug)
+    waitForLoad(browser, 0.8, debbug)
     action = ActionChains(browser)
 
     # press the login button
@@ -74,5 +74,6 @@ def delete_all_chats(browser):
     # will delete all conversations
     print("Deleting all conversations...")
     while deleteConversation(browser):
-        pass
+        timeR(1, 0.3)
+    browser.refresh()
     print("All conversations deleted")
