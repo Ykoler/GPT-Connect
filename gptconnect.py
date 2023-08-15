@@ -7,16 +7,16 @@ from botdetection import *
 from drivermanager import *
 
 class GPT_Connect:
-    def initiate_driver(self,email,password, debbug=False):
-        if(debbug):
-            startTime = time.time()
+    def initiate_driver(self,email,password, debbug=False, hidden=True):
+        #if(debbug):
+        startTime = time.time()
         self.browser = initialize_chrome_driver(debbug=debbug)
         
-        gptmanager.setupBrowser(self.browser, "https://chat.openai.com/auth/login", email, password, debbug = debbug)
+        gptmanager.setupBrowser(self.browser, "https://chat.openai.com/auth/login", email, password, debbug = debbug, headless = hidden)
         self.response_index = 0
         self.action = ActionChains(self.browser)
-        if(debbug):
-            print("Time to initiate driver: " + str(time.time() - startTime))
+        #if(debbug):
+        print("Time to initiate driver: " + str(time.time() - startTime))
 
 
     def reply(self, query):
@@ -26,11 +26,13 @@ class GPT_Connect:
         )
         for word in slice_sentence(query):
             time.sleep(0.02 + randint(0, 100) / 3000)
-            self.browser.find_element(By.TAG_NAME, "textarea").send_keys(word)
+            #self.browser.find_element(By.TAG_NAME, "textarea").send_keys(word)
+            input_box.send_keys(word)
 
         # press the submit button
         timeR(0.5,0.5)
-        self.browser.find_element(By.TAG_NAME, "textarea").send_keys(Keys.RETURN)
+        #self.browser.find_element(By.TAG_NAME, "textarea").send_keys(Keys.RETURN)
+        input_box.send_keys(Keys.RETURN)
         
         # wait for the response to load, we will check evety 1 seconds if the html has changed
         time.sleep(1)
@@ -41,13 +43,10 @@ class GPT_Connect:
                 break
         # get the response
         try:
-            soup = BeautifulSoup(self.browser.page_source, "html.parser")
-            response = soup.findAll("div", {"class": "flex flex-grow flex-col gap-3"})[
-                (self.response_index * 2) + 1
-            ]
+            response = self.driver.find_elements(By.TAG_NAME, 'p').text
         except:
             raise Exception("There was an error with the response, please try again")
-        return response.text
+        return response
     
     def status(self, filename="screenshot.png"):
         self.browser.get_screenshot_as_file(filename)
