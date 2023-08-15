@@ -1,9 +1,5 @@
 /.vscode
 /credentials.py
-__pycache__/botdetection.cpython-311.pyc
-__pycache__/credentials.cpython-311.pyc
-__pycache__/drivermanager.cpython-311.pyc
-__pycache__/gptmanager.cpython-311.pyc
-__pycache__/imports.cpython-311.pyc
-__pycache__/manager.cpython-311.pyc
+__pycache__/
 screenshot.png
+test.py

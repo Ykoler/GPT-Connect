@@ -1,46 +1,39 @@
 from imports import *
 from botdetection import timeR, move_mouse
 
-def setupBrowser(browser,url,email,password):
-    print("Setting up browser...")
+def setupBrowser(browser,url,email,password, debbug=False):
+    if debbug:
+        print("Setting up browser...")
+    
     browser.get(url)
     time.sleep(2)
     action = ActionChains(browser)
     
     #press the login button
-    '''
-    try:
-        browser.find_element(By.XPATH, '//*[@id="__next"]/div[1]/div[2]/div[1]').find_element(By.CSS_SELECTOR,"button").click()
-    except:
-        #option 2
-        browser.find_element(By.XPATH, '//*[@id="__next"]/div[1]/div[1]/div[4]').find_element(By.CSS_SELECTOR,"button").click()
-    '''
     action.send_keys(Keys.TAB, Keys.ENTER).perform()
     timeR(1.5)
     #enter the email
-    #browser.find_element(By.XPATH, "/html/body/div[1]/main/section/div/div/div/div[1]/div/form/div[1]/div/div/div/input").send_keys(email)
-    for i in email:
-        action.send_keys(i).perform()
-        timeR(0.1,0.1)
-        
-    print("Email entered")
+    action.send_keys(email).perform()
+    if debbug:
+        print("Email entered")
     #press the continue button
     timeR(0.5)
     action.send_keys(Keys.ENTER).perform()
     timeR(2)
     #enter the password
     browser.find_element(By.XPATH, "/html/body/div[1]/main/section/div/div/div/form/div[2]/div/div[2]/div/input").send_keys(password)
-    print("Password entered")
+    if debbug:
+        print("Password entered")
     #press the login button
-    timeR(0.5)
     action.send_keys(Keys.ENTER).perform()
     timeR(1)
-    print("Login complete")
+    if debbug:
+        print("Login complete")
     #navigae out of the first entry screen by sending a spacific siquence of keys
     action.send_keys(Keys.ENTER, Keys.TAB*13, Keys.ENTER, Keys.TAB*14, Keys.ENTER).perform()
-    timeR(1)
-    print("Setup complete, awaiting response...")
-    timeR(1)
+    timeR(0.1, 0.2)
+    if debbug:
+        print("Setup complete, awaiting response...")
 
 
 def deleteConversation(browser):
