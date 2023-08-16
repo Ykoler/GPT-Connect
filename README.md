@@ -23,9 +23,8 @@ pip install -r requirements.txt
 ## Usage
 ```python
 from gptconnect import GPTConnect
-gpt = GPTConnect(email="your_email", password="your_password",debug=False, hidden=True) #it is preferable to use an environment variable/other method to store your email and password
-# debug=True will print things like the time took to login and debug messages (default is False)
-# hidden=True will hide the browser window (default is True)
+gpt = GPTConnect(email="your_email", password="your_password")
+#it is preferable to use an environment variable/other method to store your email and password
 response = gpt.reply("What is the capital of France")
 # response = "The capital of France is Paris."
 ```
@@ -40,9 +39,9 @@ response = gpt.reply("What is the capital of France")
 #### Methods
 - `reply(prompt)`: Sends a prompt to the AI and returns the response.
 - `close()`: Closes the instance of the browser.
-- `get_response(response_index)`: Returns the response at the specified index. (default is the last response[0])
+- `get_response(response_index)`: Returns the response at the specified index. (default is the last response)
 - `get_responses()`: Returns a list of all the responses.
-- `get_prompt(prompt_index)`: Returns the prompt at the specified index. (default is the last prompt[0])
+- `get_prompt(prompt_index)`: Returns the prompt at the specified index. (default is the last prompt)
 - `refresh()`: Refreshes the page.
 - `clear()`: Deletes the last conversation.
 - `clear_all()`: Deletes all the conversations.
