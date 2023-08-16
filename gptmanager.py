@@ -2,23 +2,23 @@ from imports import *
 from botdetection import timeR, move_mouse
 
 
-def waitForLoad(browser, additional_wait_time, debbug=False):
-    if debbug:
+def waitForLoad(browser, additional_wait_time, debug=False):
+    if debug:
         print("Waiting for page to load...")
     while browser.execute_script("return document.readyState;").lower() != "complete":
         time.sleep(0.2)
         print("Waiting for page to load...")
-    if debbug:
+    if debug:
         print("Page loaded")
     timeR(additional_wait_time)
 
 
-def setupBrowser(browser, url, email, password, debbug=False, headless=False):
-    if debbug:
+def setupBrowser(browser, url, email, password, debug=False, headless=False):
+    if debug:
         print("Setting up browser...")
 
     browser.get(url)
-    waitForLoad(browser, 0.8, debbug)
+    waitForLoad(browser, 0.8, debug)
     action = ActionChains(browser)
 
     # press the login button
@@ -26,7 +26,7 @@ def setupBrowser(browser, url, email, password, debbug=False, headless=False):
     timeR(1.5)
     # enter the email
     action.send_keys(email).perform()
-    if debbug:
+    if debug:
         print("Email entered")
     # press the continue button
     timeR(0.2, 0.2)
@@ -37,19 +37,19 @@ def setupBrowser(browser, url, email, password, debbug=False, headless=False):
         By.XPATH,
         "/html/body/div[1]/main/section/div/div/div/form/div[2]/div/div[2]/div/input",
     ).send_keys(password)
-    if debbug:
+    if debug:
         print("Password entered")
     # press the login button
     action.send_keys(Keys.ENTER).perform()
-    waitForLoad(browser, 1, debbug)
-    if debbug:
+    waitForLoad(browser, 1, debug)
+    if debug:
         print("Login complete")
     # navigae out of the first entry screen by sending a spacific siquence of keys
     action.send_keys(
         Keys.ENTER, Keys.TAB * 13, Keys.ENTER, Keys.TAB * 14, Keys.ENTER
     ).perform()
     timeR(0.1, 0.2)
-    if debbug:
+    if debug:
         print("Setup complete, awaiting response...")
 
 

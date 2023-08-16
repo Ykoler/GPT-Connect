@@ -1,7 +1,7 @@
 from imports import *
 
 
-def initialize_chrome_driver(debbug=False, headless=True):
+def initialize_chrome_driver(debug=False, headless=True):
     options = uc.ChromeOptions()
     options.add_experimental_option(
         "prefs",
