@@ -12,12 +12,12 @@ It isn't meant to be used as a replacement for the API, for 4 main reasons:
 ### Step 1: Download a ChromeDriver
 Download a ChromeDriver from [here](https://chromedriver.chromium.org/downloads) and unzip it.
 
-# Step 2: Install the required packages
+### Step 2: Install the required packages
 ```bash
 pip install -r requirements.txt
 ```
 
-# Step 3: Download the project from GitHub and place all the files in a single folder.
+### Step 3: Download the project from GitHub and place all the files in a single folder.
 
 
 ## Usage
