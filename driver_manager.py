@@ -2,6 +2,7 @@ from imports import *
 
 
 def initialize_chrome_driver(debug=False, headless=True):
+    latestchromedriver = ChromeDriverManager().install()
     options = uc.ChromeOptions()
     options.add_experimental_option(
         "prefs",
@@ -13,5 +14,6 @@ def initialize_chrome_driver(debug=False, headless=True):
     if headless:
         options.headless = True
         options.add_argument("--headless")
-    chrome = uc.Chrome(options=options)
+
+    chrome = uc.Chrome(driver_executable_path=latestchromedriver, options=options)
     return chrome

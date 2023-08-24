@@ -1,5 +1,5 @@
 from imports import *
-from botdetection import timeR, move_mouse
+from bot_detection import timeR, move_mouse
 
 
 def waitForLoad(browser, additional_wait_time, debug=False):
@@ -46,7 +46,7 @@ def setupBrowser(browser, url, email, password, debug=False, headless=False):
         print("Login complete")
     # navigae out of the first entry screen by sending a spacific siquence of keys
     action.send_keys(
-        Keys.ENTER, Keys.TAB * 13, Keys.ENTER, Keys.TAB * 14, Keys.ENTER
+        Keys.ENTER*2
     ).perform()
     timeR(0.1, 0.2)
     if debug:

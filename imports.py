@@ -9,3 +9,5 @@ from random import *
 import numpy as np
 import scipy.interpolate as si
 import undetected_chromedriver as uc
+from webdriver_manager.chrome import ChromeDriverManager
+from youtube_transcript_api import YouTubeTranscriptApi
